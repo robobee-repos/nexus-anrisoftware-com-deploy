@@ -1,12 +1,12 @@
 /*
  * Mandatory:
  *
- * vars.sonar.hosts[]
- * vars.sonar.issuer
+ * vars.nexus.hosts[]
+ * vars.nexus.issuer
  * 
  * Optional:
  * 
- * vars.sonar.port
+ * vars.nexus.port
  *     Defaults to 8080.
  * vars.nginx.clientMaxBodySize
  *     Defaults to "".
@@ -19,34 +19,34 @@ import "robobeerun-templates/ingress_config.stg"
 /*
  * 
  */
-xx-sonar-ingress-yaml(parent, vars) ::= <<
+xx-nexus-ingress-yaml(parent, vars) ::= <<
 ---
 
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: sonar-ingress
-  namespace: sonar-anrisoftware-com
+  name: nexus-ingress
+  namespace: nexus-anrisoftware-com
   labels:
     tier: frontend
   annotations:
     <ingressDefaultAnnotations(vars.nginx)>
 spec:
-  <ingressDefaultSpec("sonar-ingress", vars.sonar.hosts)>
+  <ingressDefaultSpec("nexus-ingress", vars.nexus.hosts)>
 
 ---
 
-<ingressService("sonar-ingress", "sonar", "sonar-anrisoftware-com", vars.sonar)>
+<ingressService("nexus-ingress", "nexus", "nexus-anrisoftware-com", vars.nexus)>
 
 ---
 
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: sonar-ingress
-  namespace: sonar-anrisoftware-com
+  name: nexus-ingress
+  namespace: nexus-anrisoftware-com
 spec:
-  <certDefaultSpec("sonar-ingress-tls", vars.sonar.hosts, vars.sonar.issuer)>
+  <certDefaultSpec("nexus-ingress-tls", vars.nexus.hosts, vars.nexus.issuer)>
 
 ---
 
