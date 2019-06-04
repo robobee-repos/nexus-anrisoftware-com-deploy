@@ -36,7 +36,7 @@ spec:
 
 ---
 
-<ingressService("nexus-ingress", "nexus", "nexus-anrisoftware-com", vars.nexus)>
+<ingressService("nexus-ingress", "sonatype-nexus", "nexus-anrisoftware-com", vars.nexus)>
 
 ---
 
